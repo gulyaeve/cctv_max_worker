@@ -20,7 +20,7 @@ app = FastStream(broker)
 
 
 @broker.subscriber(queue, exchange)
-async def incident_tg_handler(incident: IncidentFullInfo):
+async def incident_max_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
     if incident.cameras_screenshots:
@@ -31,10 +31,14 @@ async def incident_tg_handler(incident: IncidentFullInfo):
                     f"{screenshot_dir}/{screenshot}"
                 )
             )
-    else:
         await bot.send_message(
             chat_id=settings.MAX_CHAT_ID,
             attachments=photos,
+            text=str(incident)
+        )
+    else:
+        await bot.send_message(
+            chat_id=settings.MAX_CHAT_ID,
             text=str(incident)
         )
 
