@@ -1,5 +1,5 @@
 services:
-  cctv_tg_worker:
+  cctv_max_worker:
     image: cctv_max_worker
     build:
       context: .
