@@ -31,6 +31,7 @@ async def incident_max_handler(incident: IncidentFullInfo):
                     f"{screenshot_dir}/{screenshot}"
                 )
             )
+        logging.info(photos)
         await bot.send_message(
             chat_id=settings.MAX_CHAT_ID,
             attachments=photos,
