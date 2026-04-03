@@ -20,7 +20,7 @@ class Settings(BaseSettings):
         )
     
     QUEUE_NAME: str = "cctv_max"
-    EXCHANGE_NAME: str = "cctv_exchange"
+    EXCHANGE_NAME: str = "cctv_msg_send"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
