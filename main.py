@@ -45,10 +45,10 @@ async def incident_max_handler(incident: IncidentFullInfo):
 
 
 async def main():
-    async with broker:
-        max_queue: aio_pika.RobustQueue = await broker.declare_queue(queue)
-        max_exchange: aio_pika.RobustExchange = await broker.declare_exchange(exchange)
-        await max_queue.bind(exchange=max_exchange)
+    # async with broker:
+    #     max_queue: aio_pika.RobustQueue = await broker.declare_queue(queue)
+    #     max_exchange: aio_pika.RobustExchange = await broker.declare_exchange(exchange)
+    #     await max_queue.bind(exchange=max_exchange)
     await app.run()
 
 
