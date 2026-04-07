@@ -21,6 +21,7 @@ class IncidentFullInfo(BaseModel):
 
     def __str__(self):
         message = f"#cctv <i>{self.time_created.strftime('%d.%m.%Y %T')}</i>\n"
+        message += f"Визор: <i>{self.current_visor}</i>\n\n"
         match self.status:
             case 0:
                 message += "<b>НАРУШЕНИЙ НЕТ</b>\n"
