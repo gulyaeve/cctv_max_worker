@@ -16,12 +16,12 @@ class IncidentFullInfo(BaseModel):
     current_group: str
     current_schedule: str
     current_classroom: str
-    current_visor: str
+    current_visor: Optional[str] = None
     current_building: str
 
     def __str__(self):
         message = f"#cctv <i>{self.time_created.strftime('%d.%m.%Y %T')}</i>\n"
-        message += f"Визор: <i>{self.current_visor}</i>\n\n"
+        message += f"Визор: <i>{self.current_visor}</i>\n\n" if self.current_visor is not None else ""
         match self.status:
             case 0:
                 message += "<b>НАРУШЕНИЙ НЕТ</b>\n"
