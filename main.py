@@ -3,7 +3,7 @@ import logging
 from faststream import FastStream
 from bot.schemas import IncidentFullInfo
 from bot.settings import settings
-from bot.app import bot, build_main_keyboard
+from bot.app import bot, build_incident_answer_keyboard
 from faststream.rabbit import RabbitBroker, RabbitQueue, ExchangeType, RabbitExchange
 from maxapi.types import InputMedia
 
@@ -23,7 +23,7 @@ async def incident_max_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
     if incident.cameras_screenshots:
-        photos = [build_main_keyboard().as_markup()]
+        photos = [build_incident_answer_keyboard(incident_id=incident.id).as_markup()]
         for screenshot in incident.cameras_screenshots:
             photos.append(
                 InputMedia(
@@ -40,7 +40,7 @@ async def incident_max_handler(incident: IncidentFullInfo):
         await bot.send_message(
             chat_id=settings.MAX_CHAT_ID,
             text=str(incident),
-            attachments=[build_main_keyboard().as_markup()]
+            attachments=[build_incident_answer_keyboard(incident_id=incident.id).as_markup()]
         )
 
 

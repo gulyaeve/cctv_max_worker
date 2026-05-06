@@ -13,9 +13,9 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=settings.MAX_API_TOKEN, parse_mode=ParseMode.HTML)
 
 
-def build_main_keyboard() -> InlineKeyboardBuilder:
+def build_incident_answer_keyboard(incident_id: int) -> InlineKeyboardBuilder:
     kb = InlineKeyboardBuilder()
     kb.row(
-        CallbackButton(text="Ответить на инцидент DEMO", payload="INC_ANS"),
+        CallbackButton(text="Ответить на инцидент DEMO", payload=f"INC_ANS_{incident_id}"),
     )
     return kb
