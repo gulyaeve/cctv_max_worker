@@ -22,8 +22,18 @@ app = FastStream(broker)
 async def incident_max_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
+    if incident.status == 0:
+        text = "Оставить отзыв"
+    else:
+        text = "Ответить на инцидент"
+    
     if incident.cameras_screenshots:
-        photos = [build_incident_answer_keyboard(incident_id=incident.id).as_markup()]
+        photos = [
+            build_incident_answer_keyboard(
+                incident_id=incident.id,
+                text=text
+            ).as_markup()
+        ]
         for screenshot in incident.cameras_screenshots:
             photos.append(
                 InputMedia(
@@ -40,7 +50,12 @@ async def incident_max_handler(incident: IncidentFullInfo):
         await bot.send_message(
             chat_id=settings.MAX_CHAT_ID,
             text=str(incident),
-            attachments=[build_incident_answer_keyboard(incident_id=incident.id).as_markup()]
+            attachments=[
+                build_incident_answer_keyboard(
+                    incident_id=incident.id,
+                    text=text
+                ).as_markup()
+            ]
         )
 
 
